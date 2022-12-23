@@ -1,0 +1,34 @@
+root@e86dbcaf9003:/# hdfs dfs -put /root/txtFile.txt /user/sumandagar
+root@e86dbcaf9003:/# ls  /user/sumandagar
+ls: cannot access '/user/sumandagar': No such file or directory
+root@e86dbcaf9003:/# hdfs dfs -ls /user/sumandagar
+Found 3 items
+-rw-r--r--   1 root supergroup          0 2022-12-19 08:31 /user/sumandagar/myfile.txt
+-rw-r--r--   1 root supergroup         56 2022-12-19 08:44 /user/sumandagar/sample.txt
+-rw-r--r--   1 root supergroup          0 2022-12-19 09:08 /user/sumandagar/txtFile.txt
+root@e86dbcaf9003:/# touch csvFile.csv
+root@e86dbcaf9003:/# ls
+bin  boot  csvFile.csv  derby.log  dev  etc  home  lib  lib64  media  metastore_db  mnt  opt  proc  root  run  sbin  srv  sys  tmp  txtFile.txt  usr  var
+root@e86dbcaf9003:/# rm csvFile.csv txtFile.txt
+root@e86dbcaf9003:/# ls
+bin  boot  derby.log  dev  etc  home  lib  lib64  media  metastore_db  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@e86dbcaf9003:/# touch /root/csvFile.csv
+root@e86dbcaf9003:/# vim csvFile.csv
+root@e86dbcaf9003:/# hdfs dfs -mkdir /user/sumandagar/textData
+root@e86dbcaf9003:/# hdfs dfs -put /root/csvFile.csv /user/sumandagar/textData
+root@e86dbcaf9003:/# hdfs dfs -put /root/txtFile.txt /user/sumandagar/textData
+root@e86dbcaf9003:/# hdfs dfs -ls /user/sumandagar/testData
+ls: `/user/sumandagar/testData': No such file or directory
+root@e86dbcaf9003:/# hdfs dfs -ls /user/sumandagar/textData
+Found 2 items
+-rw-r--r--   1 root supergroup          0 2022-12-19 09:15 /user/sumandagar/textData/csvFile.csv
+-rw-r--r--   1 root supergroup          0 2022-12-19 09:16 /user/sumandagar/textData/txtFile.txt
+root@e86dbcaf9003:/# hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /file
+stat: `/file': No such file or directory
+root@e86dbcaf9003:/# hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /user/sumandagar/csvFile.csv
+stat: `/user/sumandagar/csvFile.csv': No such file or directory
+root@e86dbcaf9003:/# hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /user/sumandagar/textData/csvFile.csv
+type:regular file permissions:644 root:supergroup size:0 name:csvFile.csv
+root@e86dbcaf9003:/# hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /user/sumandagar/textData/txtFile.txt
+type:regular file permissions:644 root:supergroup size:0 name:txtFile.txt
+root@e86dbcaf9003:/#

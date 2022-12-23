@@ -1,0 +1,5 @@
+CREATE TABLE episodeIV(name String,line String)ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' TBLPROPERTIES("skip.header.count"="2");
+
+LOAD DATA LOCAL INPATH '/episodeIV_dialouges.txt' INTO TABLE episodeIV;
+
+SELECT COUNT(*) FROM episodeIV WHERE INSTR(line, 'Luke')>=1;
